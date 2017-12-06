@@ -1,0 +1,75 @@
+info:
+  component: Service Registry
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+server:
+  port: 8761
+
+eureka:
+   instance:
+     instance-id: ${spring.application.name}:${random.int}
+
+---
+
+spring:
+  profiles: default
+  
+eureka:
+  # Configure standalone mode, see http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html#_standalone_mode
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  server:
+    # Disable self-preservation during development, see https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication
+    enableSelfPreservation: false
+    # renewalPercentThreshold: 0.49
+    # renewalThresholdUpdateIntervalMs
+
+    # Set this only for this sample service without which starting the instance will by default wait for the default of 5 mins
+    waitTimeInMsWhenSyncEmpty: 0
+
+    # for the example, set this to zero as we will not have peers to sync up with.
+    # Do not set in a real environment with multi-node eureka clusters.
+    #
+    # Unkown Property ->
+    #numberRegistrySyncRetries: 0
+
+    response-cache-update-interval-ms: 1000
+
+    
+---
+# Configserver when used on Docker
+spring:
+  profiles: docker
+
+eureka:
+  client:
+      registerWithEureka: false
+      fetchRegistry: false
+      serviceUrl:
+        defaultZone: http://eureka:8761/eureka/
+  server:
+    # Disable self-preservation during development, see https://github.com/Netflix/eureka/wiki/Understanding-Eureka-Peer-to-Peer-Communication
+    enableSelfPreservation: false
+    # renewalPercentThreshold: 0.49
+    # renewalThresholdUpdateIntervalMs
+
+    # Set this only for this sample service without which starting the instance will by default wait for the default of 5 mins
+    waitTimeInMsWhenSyncEmpty: 0
+
+    # for the example, set this to zero as we will not have peers to sync up with.
+    # Do not set in a real environment with multi-node eureka clusters.
+    #
+    # Unkown Property ->
+    #numberRegistrySyncRetries: 0
+
+    response-cache-update-interval-ms: 1000
