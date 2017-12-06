@@ -24,8 +24,6 @@ spring:
 eureka:
   # Configure standalone mode, see http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html#_standalone_mode
   client:
-    registerWithEureka: false
-    fetchRegistry: false
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
   server:
@@ -53,8 +51,6 @@ spring:
 
 eureka:
   client:
-      registerWithEureka: false
-      fetchRegistry: false
       serviceUrl:
         defaultZone: http://eureka:8761/eureka/
   server:
