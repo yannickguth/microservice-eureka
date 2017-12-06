@@ -48,6 +48,11 @@ eureka:
 # Configserver when used on Docker
 spring:
   profiles: docker
+  spring:
+    cloud:
+      inetutils:
+        preferredNetworks: 10.0
+        ignoredInterfaces: eth0
 
 eureka:
   client:
